@@ -178,7 +178,7 @@ function UI.init(playerGui)
 	screenGui = UI.new("ScreenGui", {
 		Name = "HauntAHouseUI",
 		ResetOnSpawn = false,
-		IgnoreGuiInset = true,
+		IgnoreGuiInset = false,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 		DisplayOrder = 10,
 		Parent = playerGui,

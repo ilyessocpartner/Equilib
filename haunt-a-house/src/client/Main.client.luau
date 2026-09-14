@@ -14,21 +14,25 @@ local UI = require(Controllers:WaitForChild("UI"))
 
 UI.init(playerGui)
 
+local function shared(name)
+	return require(Shared:WaitForChild(name))
+end
+
 local ctx = {
 	Player = player,
 	PlayerGui = playerGui,
 	UI = UI,
-	Config = require(Shared.Config),
-	Economy = require(Shared.Economy),
-	MonsterData = require(Shared.MonsterData),
-	CoffinData = require(Shared.CoffinData),
-	Rarity = require(Shared.Rarity),
-	GachaMath = require(Shared.GachaMath),
-	SeasonPass = require(Shared.SeasonPass),
-	DailyRewards = require(Shared.DailyRewards),
-	Offers = require(Shared.Offers),
-	MonsterBuilder = require(Shared.MonsterBuilder),
-	MonetizationIds = require(Shared.MonetizationIds),
+	Config = shared("Config"),
+	Economy = shared("Economy"),
+	MonsterData = shared("MonsterData"),
+	CoffinData = shared("CoffinData"),
+	Rarity = shared("Rarity"),
+	GachaMath = shared("GachaMath"),
+	SeasonPass = shared("SeasonPass"),
+	DailyRewards = shared("DailyRewards"),
+	Offers = shared("Offers"),
+	MonsterBuilder = shared("MonsterBuilder"),
+	MonetizationIds = shared("MonetizationIds"),
 	state = nil,
 }
 
