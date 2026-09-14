@@ -5,6 +5,7 @@ Jeu Roblox de type tycoon-collection horreur mignonne : ouvrir des cercueils, pl
 - `docs/ANALYSE_MARCHE.md` : analyse de marché et justification du concept.
 - `docs/GUIDE_DEBUTANT.md` : mise en ligne pas à pas (Studio, passes, produits, identifiants, lancement).
 - `build/HauntAHouse.rbxlx` : fichier de place prêt à ouvrir dans Roblox Studio.
+- `publish/` : publication automatique via Open Cloud (`PUBLIER.cmd` sous Windows, `publier.sh` sous macOS) : passes, produits, identifiants, réglages, publication, test dans le moteur.
 
 ## Structure
 
@@ -17,7 +18,8 @@ src/server/Services/         data, joueur, carte, manoirs, inventaire, économie
 src/client/Main.client.luau  point d'entrée client
 src/client/Controllers/      HUD, boutique, offres, cercueils, inventaire, bestiaire, rebirth,
                              quotidien, saison, codes, temps de jeu, boss, animations
-tests/                       tests de logique pure (économie, gacha, offres, quotidien, saison)
+tests/                       tests de logique pure, simulation d'équilibrage, serveur Roblox factice pour l'outil de publication
+publish/                     outil de publication Open Cloud (Python et PowerShell) + test de fumée exécuté dans le moteur
 ```
 
 ## Construire
@@ -46,3 +48,9 @@ LUAU_BIN=/chemin/vers/luau tests/run_tests.sh
 - Conformité : cercueils achetables uniquement en coins, probabilités affichées (somme 100 %) et recalculées avec la chance active, `PolicyService` pour masquer les articles liés au hasard dans les régions restreintes.
 - Monétisation : 8 Game Passes, 12 Developer Products, pack de démarrage 24 h, offres flash tournantes (8 h), bundles de coins scalés par le rebirth, passe de saison à 20 paliers.
 - Rétention : quotidien avec série, récompenses de temps de jeu, classements OrderedDataStore, bestiaire, rebirth, raid coop toutes les 10 minutes, codes.
+
+## Publier
+
+Voir `docs/GUIDE_DEBUTANT.md` (section « publication automatique »). En résumé : créer une expérience vide dans Studio, créer une clé Open Cloud, remplir `publish/publish.config.json`, lancer `publish/PUBLIER.cmd` (Windows) ou `publish/publier.sh` (macOS/Linux).
+
+Tester l'outil sans toucher à Roblox : `tests/test_publish_tools.sh` lance un serveur factice et exécute les deux versions du publieur (`PWSH=/chemin/pwsh` pour inclure PowerShell).

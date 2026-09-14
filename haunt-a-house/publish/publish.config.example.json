@@ -1,0 +1,10 @@
+{
+  "apiKey": "COLLE_TA_CLE_API_ICI",
+  "universeId": 0,
+  "placeId": 0,
+  "groupId": 0,
+  "experienceName": "Haunt a House 👻 [HALLOWEEN]",
+  "serverSize": 12,
+  "makePublic": true,
+  "runSmokeTest": true
+}

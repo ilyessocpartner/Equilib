@@ -133,7 +133,7 @@ function DataService.init(services)
 		DataService.release(player)
 	end)
 
-	game:BindToClose(function()
+	pcall(game.BindToClose, game, function()
 		if memoryMode then
 			return
 		end

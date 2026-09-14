@@ -2,6 +2,44 @@
 
 Tu n'as rien à coder. Suis les étapes dans l'ordre. Compte environ 1 h 30 la première fois.
 
+## Le plus simple : publication automatique (30 min)
+
+Un outil publie tout à ta place : il crée les 8 passes et les 12 produits aux bons prix, inscrit leurs identifiants dans le jeu, règle le nom, la description et la taille des serveurs, publie la place, la rend publique et lance un test dans le moteur Roblox. Tu n'as que trois choses à faire une seule fois.
+
+### A. Créer l'expérience vide (5 min)
+
+1. Installe Roblox Studio (étape 1 ci-dessous), ouvre-le et clique sur **New** puis **Baseplate**.
+2. **File > Publish to Roblox As...** Nom : `Haunt a House`. Clique **Create**. Ferme Studio.
+3. Va sur https://create.roblox.com/dashboard/creations et clique sur l'expérience. L'adresse de la page ressemble à `https://create.roblox.com/dashboard/creations/experiences/1234567890/overview` : le nombre est ton **universeId**.
+4. Dans le menu de gauche, **Places** puis clique sur la place : le nombre dans l'adresse est ton **placeId** (c'est aussi celui de `https://www.roblox.com/games/<placeId>`).
+
+### B. Créer la clé API (5 min)
+
+1. Va sur https://create.roblox.com/dashboard/credentials et clique **Create API Key**.
+2. Nom : `Publication Haunt a House`.
+3. Dans **Access Permissions**, ajoute chaque API dont le nom contient **Universe**, **Place**, **Developer Product**, **Game Pass** et **Luau Execution**. Pour chacune, sélectionne ton expérience et coche **Read** et **Write** (ou l'opération unique proposée).
+4. Dans **Security**, laisse l'accès IP par défaut ou mets `0.0.0.0/0` si le script signale un refus.
+5. Clique **Save & Generate Key**, puis **Copy Key**. La clé n'est affichée qu'une fois : colle-la tout de suite à l'étape C.
+
+### C. Lancer la publication (2 min)
+
+1. Récupère le dossier du dépôt (GitHub : bouton **Code > Download ZIP**, puis décompresse).
+2. Dans le dossier `haunt-a-house/publish`, copie `publish.config.example.json` en `publish.config.json` et ouvre-le avec le Bloc-notes. Colle ta clé dans `apiKey`, tes nombres dans `universeId` et `placeId` (sans guillemets), puis enregistre. `groupId` reste à 0 sauf si tu as un groupe.
+3. **Windows** : double-clique sur `PUBLIER.cmd`. **Mac** : ouvre le Terminal, tape `bash ` puis glisse le fichier `publier.sh` dans la fenêtre et appuie sur Entrée (installe Python 3 depuis python.org s'il te le demande).
+4. Lis les lignes affichées : chaque étape indique ce qui a réussi. La dernière partie affiche le résultat du test dans le moteur Roblox (`RESULTAT : tous les tests passent`). En cas de ligne `!`, copie tout le texte et demande une correction.
+5. Ton jeu est en ligne et public : `https://www.roblox.com/games/<placeId>`.
+
+Relancer l'outil plus tard est sans danger : il retrouve les passes et produits déjà créés et republie simplement la dernière version.
+
+### D. Finitions sur le site (10 min)
+
+Sur create.roblox.com, ouvre l'expérience :
+* **Basic Settings** : ajoute l'icône et les miniatures (briefs plus bas), coche tous les appareils.
+* **Audience > Questionnaire** : réponds au questionnaire d'âge (obligatoire pour apparaître dans les recherches).
+* **Places > ta place** : vérifie que le nom, la description et **Max Players = 12** sont bien appliqués.
+
+Tu peux ensuite ignorer les étapes 3 à 7 ci-dessous, qui décrivent la méthode entièrement manuelle.
+
 ## Étape 1 : installer Roblox Studio (10 min)
 
 1. Va sur https://create.roblox.com et connecte-toi avec ton compte Roblox (crée-en un si besoin).
