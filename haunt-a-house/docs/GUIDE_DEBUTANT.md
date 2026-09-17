@@ -2,39 +2,38 @@
 
 Tu n'as rien à coder. Suis les étapes dans l'ordre. Compte environ 1 h 30 la première fois.
 
-## Le plus simple : publication automatique (30 min)
+## Le plus simple : publication automatique (20 min)
 
-Un outil publie tout à ta place : il crée les 8 passes et les 12 produits aux bons prix, inscrit leurs identifiants dans le jeu, règle le nom, la description et la taille des serveurs, publie la place, la rend publique et lance un test dans le moteur Roblox. Tu n'as que trois choses à faire une seule fois.
+Un outil publie tout à ta place : il crée les 8 passes et les 12 produits aux bons prix, inscrit leurs identifiants dans le jeu, règle le nom, la description et la taille des serveurs, publie la place, la rend publique et lance un test dans le moteur Roblox. Tu n'as que trois choses à faire, une seule fois.
 
 ### A. Créer l'expérience vide (5 min)
 
 1. Installe Roblox Studio (étape 1 ci-dessous), ouvre-le et clique sur **New** puis **Baseplate**.
 2. **File > Publish to Roblox As...** Nom : `Haunt a House`. Clique **Create**. Ferme Studio.
-3. Va sur https://create.roblox.com/dashboard/creations et clique sur l'expérience. L'adresse de la page ressemble à `https://create.roblox.com/dashboard/creations/experiences/1234567890/overview` : le nombre est ton **universeId**.
-4. Dans le menu de gauche, **Places** puis clique sur la place : le nombre dans l'adresse est ton **placeId** (c'est aussi celui de `https://www.roblox.com/games/<placeId>`).
+3. Va sur https://create.roblox.com/dashboard/creations et clique sur l'expérience. Copie l'adresse de la page (elle contient le numéro de l'expérience). Clique ensuite sur **Places**, puis sur la place, et copie aussi cette adresse (elle contient le numéro de la place). Tu colleras ces deux adresses à l'étape C, l'outil en extrait les numéros tout seul.
 
 ### B. Créer la clé API (5 min)
 
 1. Va sur https://create.roblox.com/dashboard/credentials et clique **Create API Key**.
 2. Nom : `Publication Haunt a House`.
 3. Dans **Access Permissions**, ajoute chaque API dont le nom contient **Universe**, **Place**, **Developer Product**, **Game Pass** et **Luau Execution**. Pour chacune, sélectionne ton expérience et coche **Read** et **Write** (ou l'opération unique proposée).
-4. Dans **Security**, laisse l'accès IP par défaut ou mets `0.0.0.0/0` si le script signale un refus.
-5. Clique **Save & Generate Key**, puis **Copy Key**. La clé n'est affichée qu'une fois : colle-la tout de suite à l'étape C.
+4. Dans **Security**, laisse l'accès IP par défaut ou mets `0.0.0.0/0` si l'outil signale un refus (erreur 401).
+5. Clique **Save & Generate Key**, puis **Copy Key**. La clé n'est affichée qu'une fois : garde-la sous la main pour l'étape C.
 
 ### C. Lancer la publication (2 min)
 
-1. Récupère le dossier du dépôt (GitHub : bouton **Code > Download ZIP**, puis décompresse).
-2. Dans le dossier `haunt-a-house/publish`, copie `publish.config.example.json` en `publish.config.json` et ouvre-le avec le Bloc-notes. Colle ta clé dans `apiKey`, tes nombres dans `universeId` et `placeId` (sans guillemets), puis enregistre. `groupId` reste à 0 sauf si tu as un groupe.
-3. **Windows** : double-clique sur `PUBLIER.cmd`. **Mac** : ouvre le Terminal, tape `bash ` puis glisse le fichier `publier.sh` dans la fenêtre et appuie sur Entrée (installe Python 3 depuis python.org s'il te le demande).
-4. Lis les lignes affichées : chaque étape indique ce qui a réussi. La dernière partie affiche le résultat du test dans le moteur Roblox (`RESULTAT : tous les tests passent`). En cas de ligne `!`, copie tout le texte et demande une correction.
-5. Ton jeu est en ligne et public : `https://www.roblox.com/games/<placeId>`.
+1. Télécharge le projet : https://github.com/ilyessocpartner/Equilib/archive/refs/heads/claude/roblox-revenue-game-bn47n5.zip puis décompresse le dossier.
+2. **Windows** : dans `haunt-a-house/publish`, double-clique sur `PUBLIER.cmd`. **Mac** : ouvre le Terminal, tape `bash ` puis glisse le fichier `publier.sh` dans la fenêtre et appuie sur Entrée (installe Python 3 depuis python.org s'il te le demande).
+3. L'outil pose trois questions : colle l'adresse de l'expérience, l'adresse de la place (ou du jeu), puis la clé API. Il enregistre tes réponses et ne les redemandera plus.
+4. Lis les lignes affichées : chaque étape indique ce qui a réussi. La dernière partie affiche le résultat du test dans le moteur Roblox (`RESULTAT : tous les tests passent`). En cas de ligne `!` ou d'`ECHEC`, copie tout le texte et envoie-le pour correction.
+5. Ton jeu est en ligne et public : `https://www.roblox.com/games/<numéro de la place>`.
 
 Relancer l'outil plus tard est sans danger : il retrouve les passes et produits déjà créés et republie simplement la dernière version.
 
 ### D. Finitions sur le site (10 min)
 
-Sur create.roblox.com, ouvre l'expérience :
-* **Basic Settings** : ajoute l'icône et les miniatures (briefs plus bas), coche tous les appareils.
+Les images sont déjà prêtes dans le dossier `haunt-a-house/marketing` : `icone_512.png` (icône) et trois miniatures `miniature_1_principale.png`, `miniature_2_raid_minuit.png`, `miniature_3_crypte.png`. Sur create.roblox.com, ouvre l'expérience :
+* **Basic Settings** : glisse l'icône dans **Icon** et les trois miniatures dans **Thumbnails** (la principale en premier), coche tous les appareils.
 * **Audience > Questionnaire** : réponds au questionnaire d'âge (obligatoire pour apparaître dans les recherches).
 * **Places > ta place** : vérifie que le nom, la description et **Max Players = 12** sont bien appliqués.
 
@@ -142,6 +141,7 @@ Mise à jour chaque semaine jusqu'à Halloween 🎃
 ```
 
 ### Icône (512 x 512) et miniature (1920 x 1080)
+Des visuels prêts à l'emploi sont fournis dans `marketing/` (regénérables avec `marketing/render.py`). Les briefs ci-dessous servent si tu veux les faire refaire par un artiste.
 - **Icône** : gros plan sur un fantôme mignon violet-blanc aux yeux jaunes qui sort d'un cercueil doré, fond violet nuit, texte « HAUNT A HOUSE » en lettres épaisses orange avec contour noir. Contraste fort, un seul sujet.
 - **Miniature** : à gauche, un manoir violet avec des fenêtres orange éclairées et de la brume ; au centre, trois monstres (fantôme, citrouille, dragon squelette) qui sautent vers l'écran ; à droite, un visiteur qui s'enfuit en criant avec des coins qui volent. Texte en haut : « FAIS PEUR. GAGNE DES COINS. » et un badge « NOUVEAU 🎃 ». Génère ces images avec un outil d'IA ou commande-les à un artiste sur les forums Roblox (budget habituel 500 à 2 000 R$).
 - Ajoute 2 autres miniatures : une du raid de Minuit (boss géant, joueurs qui l'attaquent) et une de la crypte avec les cercueils.

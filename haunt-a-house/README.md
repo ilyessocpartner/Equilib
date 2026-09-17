@@ -5,6 +5,7 @@ Jeu Roblox de type tycoon-collection horreur mignonne : ouvrir des cercueils, pl
 - `docs/ANALYSE_MARCHE.md` : analyse de marché et justification du concept.
 - `docs/GUIDE_DEBUTANT.md` : mise en ligne pas à pas (Studio, passes, produits, identifiants, lancement).
 - `build/HauntAHouse.rbxlx` : fichier de place prêt à ouvrir dans Roblox Studio.
+- `marketing/` : icône 512 et trois miniatures 1920x1080 prêtes à téléverser (sources HTML/SVG et `render.py` pour les regénérer).
 - `publish/` : publication automatique via Open Cloud (`PUBLIER.cmd` sous Windows, `publier.sh` sous macOS) : passes, produits, identifiants, réglages, publication, test dans le moteur.
 
 ## Structure

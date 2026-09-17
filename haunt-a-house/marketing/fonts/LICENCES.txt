@@ -1,0 +1,4 @@
+Polices sous licence SIL Open Font License 1.1 (utilisation commerciale autorisee) :
+- Titan One (Rodrigo Fuenzalida) : https://github.com/google/fonts/tree/main/ofl/titanone
+- Bangers (Vernon Adams) : https://github.com/google/fonts/tree/main/ofl/bangers
+- Fredoka (Milena Brandão) : https://github.com/google/fonts/tree/main/ofl/fredoka

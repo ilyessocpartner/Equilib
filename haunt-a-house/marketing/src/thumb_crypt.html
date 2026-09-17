@@ -1,0 +1,37 @@
+<style>
+body { width: 1920px; height: 1080px; }
+.sky { background: radial-gradient(ellipse at 50% 35%, #3b2160 0%, #1d1136 55%, #0e0719 100%); }
+.title { left: 0; right: 0; top: 40px; text-align: center; font-size: 140px; -webkit-text-stroke: 12px #2b0d3d; }
+.title .light { font-size: 96px; }
+.chips { position: absolute; left: 0; right: 0; bottom: 34px; display: flex; justify-content: center; gap: 22px; }
+.chip { font-family: "Fredoka", sans-serif; font-weight: 700; font-size: 40px; color: #fff; padding: 10px 30px; border-radius: 22px; border: 5px solid #fff; -webkit-text-stroke: 2px #2b0d3d; paint-order: stroke fill; box-shadow: 0 8px 0 rgba(0,0,0,0.45); }
+.q { position: absolute; left: 1560px; top: 470px; font-family: "Bangers", sans-serif; font-size: 150px; color: #d8b4ff; -webkit-text-stroke: 8px #2b0d3d; paint-order: stroke fill; transform: rotate(10deg); text-shadow: 0 0 40px rgba(180, 100, 255, 0.8); }
+.logo { right: 40px; top: 28px; font-size: 48px; }
+</style>
+<div class="sky"></div>
+<svg class="layer" viewBox="0 0 1920 1080">
+  <g fill="#2a1a48" stroke="#0f0720" stroke-width="6">
+    <path d="M120 900 V520 a170 170 0 0 1 340 0 V900 Z"/><path d="M790 900 V500 a170 170 0 0 1 340 0 V900 Z"/><path d="M1460 900 V520 a170 170 0 0 1 340 0 V900 Z"/>
+  </g>
+  <rect x="0" y="880" width="1920" height="200" fill="#34324a"/>
+  <g fill="#454360" opacity="0.8"><rect x="0" y="880" width="200" height="60"/><rect x="400" y="880" width="220" height="60"/><rect x="840" y="880" width="200" height="60"/><rect x="1300" y="880" width="220" height="60"/><rect x="1720" y="880" width="200" height="60"/><rect x="200" y="960" width="220" height="60"/><rect x="640" y="960" width="200" height="60"/><rect x="1080" y="960" width="220" height="60"/><rect x="1540" y="960" width="200" height="60"/></g>
+  <ellipse cx="965" cy="420" rx="230" ry="150" fill="#ffe9a8" opacity="0.45" filter="url(#glowBig)"/>
+  <g filter="url(#shadow)">
+    <use href="#coffin" x="150" y="560" width="190" height="352" style="--c:#8a5a2b;--a:#5a3a1a" transform="rotate(-8 245 736)"/>
+    <use href="#coffin" x="420" y="560" width="190" height="352" style="--c:#7d838f;--a:#4b515c" transform="rotate(-4 515 736)"/>
+    <use href="#coffin" x="865" y="480" width="200" height="370" style="--c:#e0a83c;--a:#8a5a10"/>
+    <use href="#coffin" x="1130" y="560" width="190" height="352" style="--c:#5a2a80;--a:#a05ae6" transform="rotate(4 1225 736)"/>
+    <use href="#coffin" x="1400" y="560" width="190" height="352" style="--c:#8fd3ff;--a:#e6f7ff" transform="rotate(8 1495 736)"/>
+    <use href="#coffin" x="1650" y="580" width="190" height="352" style="--c:#1c1030;--a:#8c3cff" transform="rotate(12 1745 756)" filter="url(#glow)"/>
+  </g>
+  <g filter="url(#shadow)"><use href="#skull" x="820" y="250" width="290" height="302"/></g>
+  <use href="#ghost" x="230" y="330" width="170" height="221" transform="rotate(-10 315 440)"/>
+  <use href="#pumpkin" x="1150" y="360" width="210" height="201" transform="rotate(8 1255 460)"/>
+  <g><use href="#coin" x="640" y="700" width="60" height="60"/><use href="#coin" x="1090" y="720" width="56" height="56"/><use href="#coin" x="700" y="820" width="50" height="50"/></g>
+</svg>
+<div class="title">48 MONSTRES<br><span class="light">À COLLECTIONNER</span></div>
+<div class="q">???</div>
+<div class="chips">
+  <div class="chip" style="background:#8f8f9a">COMMUN</div><div class="chip" style="background:#3a9fff">RARE</div><div class="chip" style="background:#b04dff">ÉPIQUE</div><div class="chip" style="background:#ff9d1c">LÉGENDAIRE</div><div class="chip" style="background:#ff3b7a">MYTHIQUE</div><div class="chip" style="background:#1a1a2a">SECRET</div>
+</div>
+<div class="logo">HAUNT A HOUSE</div>

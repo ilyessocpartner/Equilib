@@ -214,23 +214,83 @@ def smoke_test(config):
     return state, task.get("error"), messages
 
 
+def extract_ids(text):
+    """Retourne (universeId, placeId) trouves dans une adresse ou un nombre colle par l'utilisateur."""
+    text = (text or "").strip()
+    universe = None
+    place = None
+    m = re.search(r"experiences/(\d+)", text)
+    if m:
+        universe = int(m.group(1))
+    m = re.search(r"places/(\d+)", text)
+    if m:
+        place = int(m.group(1))
+    m = re.search(r"games/(\d+)", text)
+    if m:
+        place = int(m.group(1))
+    if universe is None and place is None:
+        m = re.fullmatch(r"\d{4,}", text)
+        if m:
+            universe = int(text)
+    return universe, place
+
+
+def ask(prompt):
+    try:
+        return input(prompt).strip()
+    except EOFError:
+        return ""
+
+
+def interactive_config(config):
+    """Demande les trois informations manquantes et enregistre publish.config.json."""
+    print("Configuration en 3 questions (une seule fois). Colle chaque valeur puis appuie sur Entree.\n")
+    universe = int(config.get("universeId") or 0) or None
+    place = int(config.get("placeId") or 0) or None
+    while not universe:
+        answer = ask("1/3  Adresse de la page de ton experience sur create.roblox.com (ou l'universeId) : ")
+        u, pl = extract_ids(answer)
+        universe = u
+        if pl and not place:
+            place = pl
+        if not universe:
+            print("     Je n'ai pas trouve de nombre. Exemple attendu : https://create.roblox.com/dashboard/creations/experiences/1234567890/overview")
+    while not place:
+        answer = ask("2/3  Adresse de la page du jeu (https://www.roblox.com/games/...) ou le placeId : ")
+        _, pl = extract_ids(answer)
+        if pl is None:
+            m = re.fullmatch(r"\d{4,}", answer.strip())
+            if m:
+                pl = int(answer.strip())
+        place = pl
+        if not place:
+            print("     Je n'ai pas trouve de nombre. Exemple attendu : https://www.roblox.com/games/123456789/Haunt-a-House")
+    api_key = config.get("apiKey") if config.get("apiKey") and "COLLE" not in config.get("apiKey", "") else None
+    while not api_key:
+        api_key = ask("3/3  Cle API Open Cloud (create.roblox.com/dashboard/credentials) : ")
+        if len(api_key) < 20:
+            print("     La cle semble trop courte, reessaie (bouton Copy Key sur la page de la cle).")
+            api_key = None
+    config.update({"apiKey": api_key, "universeId": universe, "placeId": place})
+    config.setdefault("groupId", 0)
+    config.setdefault("experienceName", "Haunt a House 👻 [HALLOWEEN]")
+    config.setdefault("serverSize", 12)
+    config.setdefault("makePublic", True)
+    config.setdefault("runSmokeTest", True)
+    with open(CONFIG_PATH, "w", encoding="utf-8") as handle:
+        json.dump(config, handle, ensure_ascii=False, indent=2)
+    print("     Enregistre dans publish.config.json. La prochaine fois, aucune question ne sera posee.\n")
+    return config
+
+
 def load_config():
-    if not os.path.exists(CONFIG_PATH):
-        print("Fichier publish.config.json introuvable.")
-        print("Copie publish.config.example.json en publish.config.json et remplis apiKey, universeId et placeId (voir docs/GUIDE_DEBUTANT.md).")
-        sys.exit(1)
-    with open(CONFIG_PATH, "r", encoding="utf-8") as handle:
-        config = json.load(handle)
-    problems = []
-    if not config.get("apiKey") or "COLLE" in config.get("apiKey", ""):
-        problems.append("apiKey manquante")
-    if not int(config.get("universeId") or 0):
-        problems.append("universeId manquant")
-    if not int(config.get("placeId") or 0):
-        problems.append("placeId manquant")
-    if problems:
-        print("Configuration incomplete : " + ", ".join(problems) + ". Ouvre publish.config.json et complete-le.")
-        sys.exit(1)
+    config = {}
+    if os.path.exists(CONFIG_PATH):
+        with open(CONFIG_PATH, "r", encoding="utf-8") as handle:
+            config = json.load(handle)
+    incomplete = (not config.get("apiKey") or "COLLE" in config.get("apiKey", "") or not int(config.get("universeId") or 0) or not int(config.get("placeId") or 0))
+    if incomplete:
+        config = interactive_config(config)
     config["universeId"] = int(config["universeId"])
     config["placeId"] = int(config["placeId"])
     return config
@@ -249,6 +309,13 @@ def main():
     try:
         pass_ids = ensure_items(config, "Pass", GAME_PASSES, "game-passes/v1/universes/{universe}/game-passes/creator", "game-passes/v1/universes/{universe}/game-passes", "gamePasses", "gamePassId")
     except RobloxError as error:
+        if "HTTP 401" in str(error):
+            print("   ! Cle API refusee par Roblox (401). Elle est peut-etre mal copiee, expiree, ou limitee a une autre adresse IP.")
+            print("   ! Cree une nouvelle cle (create.roblox.com/dashboard/credentials), puis relance : la cle te sera redemandee.")
+            config["apiKey"] = ""
+            with open(CONFIG_PATH, "w", encoding="utf-8") as handle:
+                json.dump(config, handle, ensure_ascii=False, indent=2)
+            sys.exit(3)
         print("   ! Impossible de creer les passes : " + str(error))
         print("   ! Verifie que la cle API a la permission Game Passes (lecture + ecriture) sur cette experience.")
     print("\n[2/6] Developer Products")

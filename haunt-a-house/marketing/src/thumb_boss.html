@@ -1,0 +1,38 @@
+<style>
+body { width: 1920px; height: 1080px; }
+.sky { background: radial-gradient(ellipse at 65% 30%, #6b1f3a 0%, #3a1552 45%, #120820 100%); }
+.title { left: 70px; top: 70px; font-size: 150px; -webkit-text-stroke: 12px #2b0d3d; color: #ff4d4d; text-shadow: 0 6px 0 #5a0f0f, 0 12px 0 #2b0d3d, 0 0 50px rgba(255, 60, 60, 0.5); }
+.sub { position: absolute; left: 80px; top: 360px; width: 760px; line-height: 1.05; font-family: "Bangers", sans-serif; font-size: 74px; color: #fff; -webkit-text-stroke: 7px #2b0d3d; paint-order: stroke fill; letter-spacing: 0.05em; text-shadow: 0 6px 0 #2b0d3d; }
+.hp { position: absolute; left: 480px; top: 12px; width: 960px; height: 54px; background: #1a0a20; border: 6px solid #fff; border-radius: 27px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
+.hp .fill { width: 62%; height: 100%; background: linear-gradient(#ff6b6b, #c40f2b); }
+.hp .txt { position: absolute; inset: 0; text-align: center; font-family: "Fredoka", sans-serif; font-weight: 700; font-size: 30px; line-height: 42px; color: #fff; -webkit-text-stroke: 3px #2b0d3d; paint-order: stroke fill; }
+.logo { right: 48px; bottom: 30px; font-size: 60px; }
+</style>
+<div class="sky"></div>
+<div class="fog" style="left:-100px;top:700px;width:900px;height:300px"></div>
+<div class="fog" style="left:1000px;top:760px;width:1000px;height:300px"></div>
+<svg class="layer" viewBox="0 0 1920 1080">
+  <g fill="#fff" opacity="0.85"><circle cx="220" cy="520" r="3"/><circle cx="1500" cy="90" r="3"/><circle cx="1800" cy="300" r="4"/><circle cx="1650" cy="500" r="3"/><circle cx="60" cy="640" r="3"/></g>
+  <circle cx="1560" cy="180" r="110" fill="#ffd0d0" filter="url(#glowBig)"/>
+  <use href="#bat" x="1200" y="140" width="170" height="85"/><use href="#bat" x="1380" y="60" width="120" height="60"/><use href="#bat" x="1700" y="420" width="140" height="70"/>
+  <ellipse cx="960" cy="1180" rx="1400" ry="300" fill="#1d1233"/>
+  <use href="#tomb" x="120" y="700" width="130" height="165"/><use href="#tomb" x="300" y="760" width="110" height="140"/><use href="#tomb" x="1780" y="720" width="120" height="150"/>
+  <g filter="url(#shadow)"><use href="#hunter" x="900" y="150" width="700" height="848"/></g>
+  <use href="#ghost" x="1520" y="440" width="150" height="195" transform="rotate(80 1595 537)" opacity="0.9"/>
+  <path d="M1560 520 q40 -60 100 -20 q-50 10 -40 60" fill="none" stroke="#c9b6ff" stroke-width="10" stroke-linecap="round" opacity="0.8"/>
+  <g opacity="0.55" fill="#fff59a" filter="url(#glow)">
+    <polygon points="520,760 1000,560 1040,660"/>
+    <polygon points="700,840 1010,640 1060,720"/>
+    <polygon points="880,900 1020,700 1080,760"/>
+  </g>
+  <g filter="url(#shadow)">
+    <use href="#avatar" x="440" y="700" width="150" height="242" style="--shirt:#4d8bff"/>
+    <use href="#avatar" x="620" y="770" width="150" height="242" style="--shirt:#5ee07a"/>
+    <use href="#avatar" x="800" y="820" width="150" height="242" style="--shirt:#ffd166"/>
+  </g>
+  <g fill="#ffb02e" filter="url(#glow)"><text x="1030" y="540" font-family="Bangers" font-size="120" fill="#ffe66d" stroke="#2b0d3d" stroke-width="8" paint-order="stroke" transform="rotate(-10 1030 540)">-2 400</text></g>
+</svg>
+<div class="hp"><div class="fill"></div><div class="txt">CAPITAINE CHASSEUR   37 200 / 60 000 PV</div></div>
+<div class="title">RAID DE<br>MINUIT</div>
+<div class="sub">TOUS ENSEMBLE,<br>TOUTES LES 10 MIN !</div>
+<div class="logo">HAUNT A HOUSE</div>

@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <defs>
+    <radialGradient id="gEye" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fff9c4"/><stop offset="60%" stop-color="#ffd43b"/><stop offset="100%" stop-color="#ff9f1c"/></radialGradient>
+    <linearGradient id="gGhost" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#cfc4ee"/></linearGradient>
+    <linearGradient id="gPumpkin" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffb347"/><stop offset="100%" stop-color="#e8641b"/></linearGradient>
+    <linearGradient id="gBone" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fffdf5"/><stop offset="100%" stop-color="#d9d0bd"/></linearGradient>
+    <linearGradient id="gCoin" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fff1a8"/><stop offset="50%" stop-color="#ffc83d"/><stop offset="100%" stop-color="#d98a00"/></linearGradient>
+    <linearGradient id="gCoat" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3f6b46"/><stop offset="100%" stop-color="#1f3a25"/></linearGradient>
+    <linearGradient id="gMoon" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fff9dd"/><stop offset="100%" stop-color="#f4dd8a"/></linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="glowBig" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="22" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#000" flood-opacity="0.45"/></filter>
+
+    <symbol id="ghost" viewBox="0 0 200 260">
+      <path d="M8 105 A92 92 0 0 1 192 105 V220 Q170 200 148 226 Q124 252 100 226 Q76 252 52 226 Q30 200 8 220 Z" fill="url(#gGhost)" stroke="#2b0d3d" stroke-width="9" stroke-linejoin="round"/>
+      <ellipse cx="68" cy="112" rx="24" ry="30" fill="#2b0d3d"/>
+      <ellipse cx="132" cy="112" rx="24" ry="30" fill="#2b0d3d"/>
+      <ellipse cx="68" cy="112" rx="16" ry="21" fill="url(#gEye)" filter="url(#glow)"/>
+      <ellipse cx="132" cy="112" rx="16" ry="21" fill="url(#gEye)" filter="url(#glow)"/>
+      <circle cx="72" cy="104" r="5" fill="#fff"/><circle cx="136" cy="104" r="5" fill="#fff"/>
+      <path d="M72 165 Q100 192 128 165" fill="none" stroke="#2b0d3d" stroke-width="9" stroke-linecap="round"/>
+      <path d="M84 168 l7 16 l7 -14 Z" fill="#fff" stroke="#2b0d3d" stroke-width="3"/>
+      <path d="M102 170 l7 14 l7 -16 Z" fill="#fff" stroke="#2b0d3d" stroke-width="3"/>
+      <ellipse cx="46" cy="150" rx="12" ry="7" fill="#ff9bc6" opacity="0.7"/><ellipse cx="154" cy="150" rx="12" ry="7" fill="#ff9bc6" opacity="0.7"/>
+    </symbol>
+
+    <symbol id="pumpkin" viewBox="0 0 240 230">
+      <path d="M118 22 q-6 -18 14 -22 q4 14 -2 30 Z" fill="#6b9b37" stroke="#2b0d3d" stroke-width="7" stroke-linejoin="round"/>
+      <ellipse cx="120" cy="130" rx="112" ry="92" fill="url(#gPumpkin)" stroke="#2b0d3d" stroke-width="9"/>
+      <path d="M78 42 Q52 130 78 218" fill="none" stroke="#c9511a" stroke-width="7" opacity="0.7"/>
+      <path d="M162 42 Q188 130 162 218" fill="none" stroke="#c9511a" stroke-width="7" opacity="0.7"/>
+      <path d="M120 38 Q104 130 120 222" fill="none" stroke="#c9511a" stroke-width="7" opacity="0.5"/>
+      <path d="M62 96 l40 26 l-52 8 Z" fill="#2b0d3d"/><path d="M178 96 l-40 26 l52 8 Z" fill="#2b0d3d"/>
+      <path d="M66 100 l32 22 l-42 6 Z" fill="url(#gEye)" filter="url(#glow)"/><path d="M174 100 l-32 22 l42 6 Z" fill="url(#gEye)" filter="url(#glow)"/>
+      <path d="M52 150 l22 18 l16 -16 l18 20 l18 -20 l16 16 l22 -18 l-8 30 q-64 26 -96 0 Z" fill="#2b0d3d"/>
+      <path d="M62 156 l16 12 l14 -12 l18 16 l18 -16 l14 12 l16 -12 l-6 20 q-56 20 -84 0 Z" fill="url(#gEye)" filter="url(#glow)"/>
+    </symbol>
+
+    <symbol id="skull" viewBox="0 0 240 250">
+      <path d="M62 30 q-40 -30 -52 20 q10 -10 40 4 Z" fill="#c8c0ae" stroke="#2b0d3d" stroke-width="7" stroke-linejoin="round"/>
+      <path d="M178 30 q40 -30 52 20 q-10 -10 -40 4 Z" fill="#c8c0ae" stroke="#2b0d3d" stroke-width="7" stroke-linejoin="round"/>
+      <path d="M40 118 a80 90 0 1 1 160 0 v42 q0 22 -22 22 h-116 q-22 0 -22 -22 Z" fill="url(#gBone)" stroke="#2b0d3d" stroke-width="9" stroke-linejoin="round"/>
+      <rect x="66" y="176" width="108" height="50" rx="14" fill="url(#gBone)" stroke="#2b0d3d" stroke-width="9"/>
+      <g stroke="#2b0d3d" stroke-width="5"><line x1="92" y1="180" x2="92" y2="222"/><line x1="112" y1="180" x2="112" y2="222"/><line x1="132" y1="180" x2="132" y2="222"/><line x1="152" y1="180" x2="152" y2="222"/></g>
+      <ellipse cx="84" cy="116" rx="26" ry="30" fill="#2b0d3d"/><ellipse cx="156" cy="116" rx="26" ry="30" fill="#2b0d3d"/>
+      <ellipse cx="84" cy="118" rx="15" ry="18" fill="#7cff8a" filter="url(#glow)"/><ellipse cx="156" cy="118" rx="15" ry="18" fill="#7cff8a" filter="url(#glow)"/>
+      <path d="M120 140 l-12 24 h24 Z" fill="#2b0d3d"/>
+    </symbol>
+
+    <symbol id="coin" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="46" fill="url(#gCoin)" stroke="#7a4b00" stroke-width="6"/>
+      <circle cx="50" cy="50" r="30" fill="none" stroke="#7a4b00" stroke-width="5" opacity="0.7"/>
+      <path d="M50 30 l7 14 l15 2 l-11 11 l3 15 l-14 -7 l-14 7 l3 -15 l-11 -11 l15 -2 Z" fill="#fff4bf" stroke="#7a4b00" stroke-width="3"/>
+    </symbol>
+
+    <symbol id="mansion" viewBox="0 0 640 520">
+      <g fill="#241542" stroke="#0f0720" stroke-width="6" stroke-linejoin="round">
+        <rect x="40" y="250" width="560" height="260"/>
+        <polygon points="20,250 320,120 620,250"/>
+        <rect x="90" y="100" width="120" height="180"/>
+        <polygon points="70,100 150,20 230,100"/>
+        <rect x="430" y="140" width="140" height="150"/>
+        <polygon points="410,140 500,60 590,140"/>
+        <rect x="290" y="400" width="70" height="110" rx="35"/>
+      </g>
+      <g fill="#ffb02e" filter="url(#glow)">
+        <rect x="110" y="140" width="34" height="46" rx="6"/><rect x="160" y="140" width="34" height="46" rx="6"/>
+        <rect x="90" y="300" width="44" height="60" rx="6"/><rect x="170" y="300" width="44" height="60" rx="6"/>
+        <rect x="420" y="300" width="44" height="60" rx="6"/><rect x="500" y="300" width="44" height="60" rx="6"/>
+        <rect x="460" y="180" width="40" height="50" rx="6"/>
+        <rect x="255" y="290" width="40" height="52" rx="6"/><rect x="345" y="290" width="40" height="52" rx="6"/>
+      </g>
+      <rect x="300" y="410" width="50" height="100" rx="25" fill="#9b5cff" opacity="0.8" filter="url(#glow)"/>
+    </symbol>
+
+    <symbol id="hunter" viewBox="0 0 380 460">
+      <ellipse cx="160" cy="440" rx="120" ry="18" fill="#000" opacity="0.35"/>
+      <rect x="70" y="140" width="180" height="230" rx="40" fill="url(#gCoat)" stroke="#0f0720" stroke-width="9"/>
+      <rect x="60" y="250" width="200" height="26" rx="8" fill="#3d2410" stroke="#0f0720" stroke-width="6"/>
+      <rect x="90" y="360" width="56" height="90" rx="14" fill="#2a2018" stroke="#0f0720" stroke-width="8"/>
+      <rect x="174" y="360" width="56" height="90" rx="14" fill="#2a2018" stroke="#0f0720" stroke-width="8"/>
+      <circle cx="160" cy="100" r="62" fill="#e6c29a" stroke="#0f0720" stroke-width="9"/>
+      <rect x="60" y="48" width="200" height="22" rx="10" fill="#1d1410" stroke="#0f0720" stroke-width="6"/>
+      <rect x="105" y="0" width="110" height="60" rx="12" fill="#1d1410" stroke="#0f0720" stroke-width="6"/>
+      <ellipse cx="136" cy="104" rx="14" ry="10" fill="#ff2e2e" filter="url(#glow)"/><ellipse cx="184" cy="104" rx="14" ry="10" fill="#ff2e2e" filter="url(#glow)"/>
+      <path d="M130 140 q30 18 60 0" fill="none" stroke="#0f0720" stroke-width="7" stroke-linecap="round"/>
+      <rect x="230" y="190" width="110" height="46" rx="22" fill="#9a9aa6" stroke="#0f0720" stroke-width="8"/>
+      <circle cx="340" cy="213" r="30" fill="#5a5a66" stroke="#0f0720" stroke-width="8"/>
+      <rect x="20" y="170" width="60" height="150" rx="26" fill="#7a3fd6" opacity="0.85" stroke="#0f0720" stroke-width="7" filter="url(#glow)"/>
+    </symbol>
+
+    <symbol id="avatar" viewBox="0 0 130 210">
+      <rect x="35" y="10" width="60" height="60" rx="12" fill="#ffd9a8" stroke="#0f0720" stroke-width="7"/>
+      <rect x="20" y="76" width="90" height="80" rx="14" fill="var(--shirt, #4d8bff)" stroke="#0f0720" stroke-width="7"/>
+      <rect x="2" y="80" width="24" height="72" rx="10" fill="#ffd9a8" stroke="#0f0720" stroke-width="6"/>
+      <rect x="104" y="80" width="24" height="72" rx="10" fill="#ffd9a8" stroke="#0f0720" stroke-width="6"/>
+      <rect x="28" y="158" width="32" height="48" rx="10" fill="#2e3a5c" stroke="#0f0720" stroke-width="6"/>
+      <rect x="70" y="158" width="32" height="48" rx="10" fill="#2e3a5c" stroke="#0f0720" stroke-width="6"/>
+      <circle cx="53" cy="36" r="6" fill="#0f0720"/><circle cx="77" cy="36" r="6" fill="#0f0720"/>
+      <ellipse cx="65" cy="54" rx="9" ry="7" fill="#0f0720"/>
+    </symbol>
+
+    <symbol id="coffin" viewBox="0 0 140 260">
+      <polygon points="40,4 100,4 136,70 116,256 24,256 4,70" fill="var(--c, #8a5a2b)" stroke="#0f0720" stroke-width="8" stroke-linejoin="round"/>
+      <polygon points="48,24 92,24 118,74 104,232 36,232 22,74" fill="none" stroke="var(--a, #5a3a1a)" stroke-width="7" opacity="0.8"/>
+      <rect x="62" y="80" width="16" height="70" rx="6" fill="var(--a, #5a3a1a)"/><rect x="42" y="100" width="56" height="16" rx="6" fill="var(--a, #5a3a1a)"/>
+    </symbol>
+
+    <symbol id="tomb" viewBox="0 0 120 150">
+      <path d="M10 150 V60 a50 50 0 0 1 100 0 V150 Z" fill="#5a5a70" stroke="#0f0720" stroke-width="7"/>
+      <path d="M40 70 h40 M60 52 v40" stroke="#2b2b3a" stroke-width="8" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="bat" viewBox="0 0 200 100">
+      <path d="M100 30 q-20 -30 -60 -20 q10 20 -30 40 q40 -10 50 10 q20 -10 40 20 q20 -30 40 -20 q10 -20 50 -10 q-40 -20 -30 -40 q-40 -10 -60 20 Z" fill="#1a0f2e" stroke="#0f0720" stroke-width="5"/>
+      <circle cx="90" cy="32" r="4" fill="#ff2e2e"/><circle cx="110" cy="32" r="4" fill="#ff2e2e"/>
+    </symbol>
+  </defs>
+</svg>

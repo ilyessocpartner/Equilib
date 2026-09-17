@@ -58,22 +58,77 @@ function Write-Step($text) { Write-Host ""; Write-Host $text -ForegroundColor Cy
 function Write-Warn($text) { Write-Host ("   ! " + $text) -ForegroundColor Yellow }
 function Write-Ok($text) { Write-Host ("   " + $text) -ForegroundColor Green }
 
+function Extract-Ids($text) {
+    $text = ("" + $text).Trim()
+    $universe = $null
+    $place = $null
+    $m = [regex]::Match($text, "experiences/(\d+)")
+    if ($m.Success) { $universe = [int64]$m.Groups[1].Value }
+    $m = [regex]::Match($text, "places/(\d+)")
+    if ($m.Success) { $place = [int64]$m.Groups[1].Value }
+    $m = [regex]::Match($text, "games/(\d+)")
+    if ($m.Success) { $place = [int64]$m.Groups[1].Value }
+    if ($null -eq $universe -and $null -eq $place -and [regex]::IsMatch($text, "^\d{4,}$")) { $universe = [int64]$text }
+    return @{ Universe = $universe; Place = $place }
+}
+
+function Interactive-Config($config) {
+    Write-Host "Configuration en 3 questions (une seule fois). Colle chaque valeur puis appuie sur Entree." -ForegroundColor Cyan
+    Write-Host ""
+    $universe = $null
+    $place = $null
+    if ($config.universeId -and [int64]$config.universeId -ne 0) { $universe = [int64]$config.universeId }
+    if ($config.placeId -and [int64]$config.placeId -ne 0) { $place = [int64]$config.placeId }
+    while ($null -eq $universe) {
+        $answer = Read-Host "1/3  Adresse de la page de ton experience sur create.roblox.com (ou l'universeId)"
+        $ids = Extract-Ids $answer
+        $universe = $ids.Universe
+        if ($ids.Place -and $null -eq $place) { $place = $ids.Place }
+        if ($null -eq $universe) { Write-Host "     Je n'ai pas trouve de nombre. Exemple attendu : https://create.roblox.com/dashboard/creations/experiences/1234567890/overview" -ForegroundColor Yellow }
+    }
+    while ($null -eq $place) {
+        $answer = Read-Host "2/3  Adresse de la page du jeu (https://www.roblox.com/games/...) ou le placeId"
+        $ids = Extract-Ids $answer
+        $place = $ids.Place
+        if ($null -eq $place -and [regex]::IsMatch(("" + $answer).Trim(), "^\d{4,}$")) { $place = [int64]("" + $answer).Trim() }
+        if ($null -eq $place) { Write-Host "     Je n'ai pas trouve de nombre. Exemple attendu : https://www.roblox.com/games/123456789/Haunt-a-House" -ForegroundColor Yellow }
+    }
+    $apiKey = $null
+    if ($config.apiKey -and $config.apiKey -notlike "*COLLE*") { $apiKey = $config.apiKey }
+    while (-not $apiKey) {
+        $apiKey = (Read-Host "3/3  Cle API Open Cloud (create.roblox.com/dashboard/credentials)").Trim()
+        if ($apiKey.Length -lt 20) { Write-Host "     La cle semble trop courte, reessaie (bouton Copy Key sur la page de la cle)." -ForegroundColor Yellow; $apiKey = $null }
+    }
+    $result = [ordered]@{
+        apiKey = $apiKey
+        universeId = $universe
+        placeId = $place
+        groupId = 0
+        experienceName = "Haunt a House 👻 [HALLOWEEN]"
+        serverSize = 12
+        makePublic = $true
+        runSmokeTest = $true
+    }
+    if ($config.groupId) { $result.groupId = [int64]$config.groupId }
+    if ($config.experienceName) { $result.experienceName = $config.experienceName }
+    if ($config.serverSize) { $result.serverSize = [int]$config.serverSize }
+    if ($null -ne $config.makePublic) { $result.makePublic = [bool]$config.makePublic }
+    if ($null -ne $config.runSmokeTest) { $result.runSmokeTest = [bool]$config.runSmokeTest }
+    $json = $result | ConvertTo-Json -Depth 3
+    [System.IO.File]::WriteAllText($ConfigPath, $json, $Utf8NoBom)
+    Write-Host "     Enregistre dans publish.config.json. La prochaine fois, aucune question ne sera posee." -ForegroundColor Green
+    Write-Host ""
+    return ([System.IO.File]::ReadAllText($ConfigPath, [System.Text.Encoding]::UTF8) | ConvertFrom-Json)
+}
+
 function Read-Config {
-    if (-not (Test-Path $ConfigPath)) {
-        Write-Host "Fichier publish.config.json introuvable." -ForegroundColor Red
-        Write-Host "Copie publish.config.example.json en publish.config.json et remplis apiKey, universeId et placeId (voir docs/GUIDE_DEBUTANT.md)."
-        exit 1
+    $config = New-Object PSObject
+    if (Test-Path $ConfigPath) {
+        $raw = [System.IO.File]::ReadAllText($ConfigPath, [System.Text.Encoding]::UTF8)
+        $config = $raw | ConvertFrom-Json
     }
-    $raw = [System.IO.File]::ReadAllText($ConfigPath, [System.Text.Encoding]::UTF8)
-    $config = $raw | ConvertFrom-Json
-    $problems = @()
-    if (-not $config.apiKey -or $config.apiKey -like "*COLLE*") { $problems += "apiKey manquante" }
-    if (-not $config.universeId -or [int64]$config.universeId -eq 0) { $problems += "universeId manquant" }
-    if (-not $config.placeId -or [int64]$config.placeId -eq 0) { $problems += "placeId manquant" }
-    if ($problems.Count -gt 0) {
-        Write-Host ("Configuration incomplete : " + ($problems -join ", ") + ". Ouvre publish.config.json et complete-le.") -ForegroundColor Red
-        exit 1
-    }
+    $incomplete = (-not $config.apiKey) -or ($config.apiKey -like "*COLLE*") -or (-not $config.universeId) -or ([int64]$config.universeId -eq 0) -or (-not $config.placeId) -or ([int64]$config.placeId -eq 0)
+    if ($incomplete) { $config = Interactive-Config $config }
     return $config
 }
 
@@ -184,6 +239,13 @@ Write-Step "[1/6] Game Passes"
 try {
     $passIds = Ensure-Items $config "Pass" $GamePasses "game-passes/v1/universes/{universe}/game-passes/creator" "game-passes/v1/universes/{universe}/game-passes" "gamePasses" "gamePassId"
 } catch {
+    if ($_.Exception.Message -like "*HTTP 401*") {
+        Write-Host "   ! Cle API refusee par Roblox (401). Elle est peut-etre mal copiee, expiree, ou limitee a une autre adresse IP." -ForegroundColor Red
+        Write-Host "   ! Cree une nouvelle cle (create.roblox.com/dashboard/credentials), puis relance : la cle te sera redemandee." -ForegroundColor Red
+        $config.apiKey = ""
+        [System.IO.File]::WriteAllText($ConfigPath, ($config | ConvertTo-Json -Depth 3), $Utf8NoBom)
+        exit 3
+    }
     Write-Warn ("Impossible de creer les passes : " + $_.Exception.Message)
     Write-Warn "Verifie que la cle API a la permission Game Passes (lecture + ecriture) sur cette experience."
 }

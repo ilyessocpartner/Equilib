@@ -1,0 +1,5 @@
+# Fichiers generes ou secrets : ne jamais les versionner
+__pycache__/
+*.pyc
+publish/publish.config.json
+marketing/src/_*.build.html
